@@ -6,21 +6,23 @@ predicates
 	switch(integer, integer, string)
 clauses
 	go:-
+	clearwindow(),
 	write("When are you"),nl,
-	write(" going to bed?"),nl,
+	write("going to bed?"),nl,
 	write("---------------"),nl,
 	write("Enter hour: "), readint(H),
 	write("Enter Minutes: "), readint(M),
-	write(H, ":", M),nl,
 	write("AM? (y/n)"),nl,readchar(AM),
 	amcheck(H,M,AM).
 	
 	amcheck(H,M, AM):-
 		AM = 'y',
+		write(H,":",M," ","AM"),nl,
 		calc(H,M,"AM").
 	
 	amcheck(H,M,AM):- 
 		AM ='n',
+		write(H,":", M, " ", "PM"),nl,
 		calc(H,M,"PM").
 	
 	switch(H,M,AM):-
@@ -43,9 +45,9 @@ clauses
         	write(H,":",M," ",AM),nl.
 	
 	calc(H,M,AM):-
-		write("You should concider"),nl,
-		write(" setting your alarm at-"),nl,
-		write("--:--"),nl,
+		write("You should consider"),nl,
+		write("setting your alarm at"),nl,
+		write("-------"),nl,
 		M1 = (M+105) mod 60,
 		H1 =(H+ ((M+105) div 60)),
 		result(H1,M1,AM),
